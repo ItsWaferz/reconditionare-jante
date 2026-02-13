@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recondiționare Jante</title>
+
+    <style>
+      body {
+        margin: 0;
+        background-color: #0f172a; /* bg-slate-900 */
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+
+      .app-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0f172a;
+        z-index: 9999;
+      }
+
+      .loading-content {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .spinner {
+        position: absolute;
+        width: 128px;
+        height: 128px;
+        border-radius: 50%;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-top-color: #f97316;
+        animation: spin 1s linear infinite;
+      }
+
+      .logo-container {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          #f97316,
+          #dc2626
+        );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        position: relative;
+        z-index: 10;
+      }
+
+      .logo-text {
+        color: white;
+        font-weight: bold;
+        font-size: 2.25rem;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="app-loading">
+        <div class="loading-content">
+          <div class="spinner"></div>
+          <div class="logo-container">
+            <span class="logo-text">RJ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
