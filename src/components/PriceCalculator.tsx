@@ -4,7 +4,7 @@ import { Calculator, Check } from "lucide-react";
 type RimType = "tabla" | "aliaj";
 type RimSize = "13-15" | "16-17" | "18-19" | "20+";
 type ColorType = "standard" | "premium" | "disabled";
-type FinishType = "mat" | "lucios" | "disabled";
+type Vulcanizare = "da" | "nu";
 
 const rimTypes = { tabla: "Jante de tablă", aliaj: "Jante de aliaj" };
 
@@ -28,10 +28,9 @@ const colorPrices = {
   disabled: 0,
 };
 
-const finishPrices = {
-  mat: 0,
-  lucios: 30,
-  disabled: 0,
+const vulcanizarePrices = {
+  da: 50,
+  nu: 0,
 };
 
 const additionalServices = {
@@ -43,9 +42,9 @@ const additionalServices = {
 
 export default function PriceCalculator() {
   const [rimType, setRimType] = useState<RimType>("aliaj");
-  const [rimSize, setRimSize] = useState<RimSize>("16-17");
+  const [rimSize, setRimSize] = useState<RimSize>("18-19");
   const [colorType, setColorType] = useState<ColorType>("standard");
-  const [finishType, setFinishType] = useState<FinishType>("mat");
+  const [vulcanizare, setVulcanizare] = useState<Vulcanizare>("nu");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [quantity, setQuantity] = useState(4);
   const [salePercentage, setSalePercentage] = useState(15);
@@ -54,10 +53,8 @@ export default function PriceCalculator() {
   const handleRimTypeChange = (type: RimType) => {
     setRimType(type);
     if (type === "tabla") {
-      setFinishType("disabled");
       setColorType("disabled");
     } else {
-      setFinishType("mat");
       setColorType("standard");
     }
     setBasePrices(type === "aliaj" ? baseAlloyPrices : baseSteelPrices);
@@ -85,7 +82,7 @@ export default function PriceCalculator() {
   const calculatePrice = () => {
     let total = basePrices[rimSize];
     total += colorPrices[colorType];
-    total += finishPrices[finishType];
+    total += vulcanizarePrices[vulcanizare];
 
     return total * quantity;
   };
@@ -124,13 +121,7 @@ export default function PriceCalculator() {
               reduceri începând de la 15%
             </span>{" "}
             pentru un set de{" "}
-            <span className="font-bold text-orange-500">minim 4 jante!</span> De
-            asemenea, serviciile de{" "}
-            <span className="font-bold text-orange-500">vulcanizare</span>
-            {" ("}
-            demontat, dejantat, echilibrat, schimbare valve și montat{
-              ")"
-            } sunt <span className="font-bold text-orange-500">incluse!</span>
+            <span className="font-bold text-orange-500">minim 4 jante!</span>
           </p>
         </div>
 
@@ -229,44 +220,34 @@ export default function PriceCalculator() {
             </div>
             <div>
               <label className="block text-lg font-semibold text-gray-900 mb-4">
-                Finisaj
+                Servicii Vulcanizare
               </label>
               <div className="grid grid-cols-2 gap-4">
                 <button
-                  onClick={() => setFinishType("mat")}
+                  onClick={() => setVulcanizare("nu")}
                   className={`p-4 rounded-xl border-2 transition-all ${
-                    finishType === "mat"
+                    vulcanizare === "nu"
                       ? "border-orange-500 bg-orange-50 text-orange-700"
                       : rimType === "tabla"
                         ? "border-gray-200 hover:border-red-300"
                         : "border-gray-200 hover:border-orange-300"
                   }`}
-                  style={{
-                    color: rimType === "tabla" ? "gray" : undefined,
-                    cursor: rimType === "tabla" ? "not-allowed" : "pointer",
-                  }}
-                  disabled={rimType === "tabla"}
                 >
-                  <div className="font-bold">Mat</div>
+                  <div className="font-bold">Nu</div>
                   <div className="text-sm text-gray-600">Inclus</div>
                 </button>
                 <button
-                  onClick={() => setFinishType("lucios")}
+                  onClick={() => setVulcanizare("da")}
                   className={`p-4 rounded-xl border-2 transition-all ${
-                    finishType === "lucios"
+                    vulcanizare === "da"
                       ? "border-orange-500 bg-orange-50 text-orange-700"
                       : rimType === "tabla"
                         ? "border-gray-200 hover:border-red-300"
                         : "border-gray-200 hover:border-orange-300"
                   }`}
-                  style={{
-                    color: rimType === "tabla" ? "gray" : undefined,
-                    cursor: rimType === "tabla" ? "not-allowed" : "pointer",
-                  }}
-                  disabled={rimType === "tabla"}
                 >
-                  <div className="font-bold">Lucios</div>
-                  <div className="text-sm text-gray-600">+30 RON</div>
+                  <div className="font-bold">Da</div>
+                  <div className="text-sm text-gray-600">+50 RON</div>
                 </button>
               </div>
             </div>
