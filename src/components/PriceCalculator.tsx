@@ -365,7 +365,7 @@ export default function PriceCalculator() {
 
                 <div className="mt-6 pt-2">
                   <a
-                    href="tel:+40123456789"
+                    href="tel:+40741625859"
                     className="block w-full bg-white text-orange-600 text-center py-4 rounded-xl font-extrabold text-xl hover:bg-gray-50 hover:scale-[1.02] transition-all duration-200 shadow-md"
                   >
                     Solicită Ofertă
