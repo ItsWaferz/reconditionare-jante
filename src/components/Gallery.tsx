@@ -20,9 +20,13 @@ export default function Gallery() {
         .select("*")
         .order("display_order", { ascending: true });
 
-      if (error) throw error;
-
-      setGalleryImages(data || []);
+      if (data) {
+        setGalleryImages(data);
+        data.forEach((image) => {
+          const img = new Image();
+          img.src = image.image_url;
+        });
+      }
     } catch (error) {
       console.error("Error loading gallery:", error);
     } finally {
